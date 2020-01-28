@@ -11,3 +11,13 @@ exports.getAxios = async (req,res) => {
         data: direction
     });
 };
+
+//Bad Practice
+exports.getPrice = (req,res) => {
+    const price = directionUtil.getPrice(req.query.kilometer);
+
+    res.status(200).send({
+        message: 'The price you should pay is: ',
+        data: price
+    });
+};
