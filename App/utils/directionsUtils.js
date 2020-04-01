@@ -40,7 +40,9 @@ exports.getPrice = (kilometer) => {
     
     let price = (distanceMeters * everySeventyEight) + banderazo + sum;
 
-    return price;
+    let retorno = parseInt(price);
+
+    return retorno;
 
 };
 
