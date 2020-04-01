@@ -4,6 +4,7 @@ const meters = 1000;
 const everySeventyEight = 110;
 const banderazo = 3600;
 const sum = 1500;
+const bills = [100000,50000,20000,10000,5000,2000,1000,500,200,100,50];
 
 
 exports.getKm = (origin, destination) => {
@@ -42,3 +43,36 @@ exports.getPrice = (kilometer) => {
     return price;
 
 };
+
+exports.getRefund = (price) => {
+    //Por el momento funcionará para viajes menores que 100.000
+
+    let refunds = [0,0,0,0,0,0,0,0,0,0,0];
+    let anterior;
+    let i = 0;
+
+    if(price==0){
+        return refunds;
+    }
+
+    while(price>0){
+        console.log(`precio tiene en iteración ${i}: `,price)
+
+        if(price>=bills[i]){
+            refunds[i]+=1;
+            price-=bills[i];
+            i+=1;
+        }else{
+            anterior=i;
+            i+=1;
+        }
+
+        //Special case
+        if(price>0 && price<50){
+            refunds[10]+=1;
+            price-=50;
+        }
+    }
+    console.log("El array tiene: ", refunds);
+    return refunds;
+}

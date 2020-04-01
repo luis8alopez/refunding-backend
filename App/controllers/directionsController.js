@@ -21,3 +21,12 @@ exports.getPrice = (req,res) => {
         data: price
     });
 };
+
+exports.getRefund = (req,res) => {
+    const refund = directionUtil.getRefund(req.query.price);
+
+    res.status(200).send({
+        message: 'The array containig the bills info is',
+        refund : refund
+    });
+}
