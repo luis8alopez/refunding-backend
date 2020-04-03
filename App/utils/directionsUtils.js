@@ -56,6 +56,9 @@ exports.getRefund = (price) => {
     if(price==0){
         return refunds;
     }
+    let jsonObj = {refund:{
+
+    }};
 
     while(price>0){
         console.log(`precio tiene en iteración ${i}: `,price)
@@ -63,7 +66,8 @@ exports.getRefund = (price) => {
         if(price>=bills[i]){
             refunds[i]+=1;
             price-=bills[i];
-            i+=1;
+            //Test
+            jsonObj.refund[bills[i]] = refunds[i];
         }else{
             anterior=i;
             i+=1;
@@ -72,9 +76,14 @@ exports.getRefund = (price) => {
         //Special case
         if(price>0 && price<50){
             refunds[10]+=1;
+            jsonObj.refund['50'] = refunds[i];
             price-=50;
+        }
+        if(i>10){
+            i=0;
         }
     }
     console.log("El array tiene: ", refunds);
-    return refunds;
+    console.log("el json tiene: ",jsonObj);
+    return jsonObj;
 }
