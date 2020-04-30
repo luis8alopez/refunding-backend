@@ -5,9 +5,10 @@ const directionRouter = express.Router();
 
 directionRouter.route('/getKm')
     .get(async(req, res, next) => {
-        origin = req.params.origin;
-        destination = req.params.destination;
+        origin = req.query.origin;
+        destination = req.query.destination;
         direction = await directionUtil.getKm(origin, destination);
+        console.log("directions",direction);
         if (!direction) {
             res.statusCode = 404
             err = 'Direction not found';
