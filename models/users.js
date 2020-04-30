@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const buySchema = new Schema({
+    precio: {
+        type: Number,
+        min: 50,
+        default: 0
+    },
+},
+    {
+        timestamps: true
+    });
+
 const userSchema = new Schema({
     firstName: {
         type: String,
@@ -32,16 +43,7 @@ const userSchema = new Schema({
     timestamps: true
 });
 
-const buySchema = new Schema({
-    precio: {
-        type: Number,
-        min: 50,
-        default: 0
-    },
-},
-    {
-        timestamps: true
-    });
+
 
 const Users = mongoose.model('User', userSchema);
 
