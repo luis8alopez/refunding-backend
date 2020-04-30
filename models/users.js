@@ -35,7 +35,8 @@ const userSchema = new Schema({
 const buySchema = new Schema({
     precio: {
         type: Number,
-        min: 50
+        min: 50,
+        default: 0
     },
 },
     {
