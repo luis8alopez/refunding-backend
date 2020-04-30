@@ -1,4 +1,4 @@
-const apiKey = 'AIzaSyA4p-qk3jvIg6T5Uzm4AXWq4GVKA1-g1k8'
+const apiKey = 'AIzaSyA4p-qk3jvIg6T5Uzm4AXWq4GVKA1-g1k8';
 const axios = require('axios');
 const meters = 1000;
 const everySeventyEight = 110;
