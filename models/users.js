@@ -17,10 +17,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        default: ''
-    },
     email: {
         type: String,
         required: true,
