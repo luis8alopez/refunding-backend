@@ -37,4 +37,21 @@ userRouter.route('/')
         res.end('Delete operation not supported on /users');
     });
 
+userRouter.route('/save').post((req, res, next) => {
+    Users.findOne({ email: req.body.email })
+        .then((result) => {
+            if (!result) {
+                Users.create({
+                    firstName: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password,
+                    photo: req.body.photo
+                });
+                res.status(200).json({ message: "Saved", flag: 1 });
+            }
+            res.status(200).json({ message: "Email already registered", flag:0 });
+        })
+})
+
+
 module.exports = userRouter;
