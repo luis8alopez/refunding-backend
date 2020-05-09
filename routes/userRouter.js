@@ -45,7 +45,8 @@ userRouter.route('/save').post((req, res, next) => {
                     firstName: req.body.name,
                     email: req.body.email,
                     password: req.body.password,
-                    photo: req.body.photo
+                    photo: req.body.photo,
+                    id: req.body.id
                 });
                 res.status(200).json({ message: "Saved", flag: 1 });
             }
