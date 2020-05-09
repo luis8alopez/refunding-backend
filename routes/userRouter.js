@@ -40,7 +40,10 @@ userRouter.route('/')
 userRouter.route('/save').post((req, res, next) => {
     Users.findOne({ email: req.body.email })
         .then((result) => {
-            if (!result) {
+            if (result) {  
+                res.status(200).json({ message: "Email already registered", flag:0 });              
+            }
+            else{
                 Users.create({
                     firstName: req.body.name,
                     email: req.body.email,
@@ -56,9 +59,7 @@ userRouter.route('/save').post((req, res, next) => {
                         res.status(200).json({ message: "Saved", flag: 1 });
                     }
                 })
-                
             }
-            res.status(200).json({ message: "Email already registered", flag:0 });
         })
 })
 
