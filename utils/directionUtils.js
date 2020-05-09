@@ -46,6 +46,7 @@ exports.getPrice = (kilometer) => {
 };
 
 exports.getRefund = (price) => {
+    //Traer el dinero disponible del user que entra.
     let refunds = [0,0,0,0,0,0,0,0,0,0,0];
     let anterior;
     let i = 0;
