@@ -47,8 +47,16 @@ userRouter.route('/save').post((req, res, next) => {
                     password: req.body.password,
                     photo: req.body.photo,
                     id: req.body.id
-                });
-                res.status(200).json({ message: "Saved", flag: 1 });
+                }).then((user)=>{
+                    if(!user){
+                        console.log("Not able to save");
+                        res.status(500).json({ message: "Saved", flag: 1 });
+                    }
+                    else{
+                        res.status(200).json({ message: "Saved", flag: 1 });
+                    }
+                })
+                
             }
             res.status(200).json({ message: "Email already registered", flag:0 });
         })
