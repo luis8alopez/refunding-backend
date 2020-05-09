@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const buySchema = new Schema({
     precio: {
         type: Number,
-        min: 50,
         default: 0
     },
 },

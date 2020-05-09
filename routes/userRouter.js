@@ -65,5 +65,31 @@ userRouter.route('/save')
             })
     })
 
+userRouter.route('/saveHistory')
+    .post((req, res, next) => {
+        Users.findOne({ email: req.body.email })
+            .then((user) => {
+                if (user) {
+                    user.history.push({precio: req.body.precio});
+                    console.log("en user hay: ",user);
+                    console.log("En user quedó user");
+                    //Error aquí.
+                    user.save() 
+                        .then((user) => {
+                            res.status(200).send({
+                                message: "User succesfully updated",
+                                user: user
+                            })
+                        }).catch((err) => { console.log(err) })
+                }
+                else {
+                    res.status(404).json({ message: "There is no user registrated" });
+                }
+
+            })
+            .catch((err) => { console.log(err) })
+
+    });
+
 
 module.exports = userRouter;
