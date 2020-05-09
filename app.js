@@ -11,7 +11,7 @@ const userRouter = require('./routes/userRouter');
 
 const app = express();
 const url = `mongodb+srv://luis:luispass@refundingcluster-11fbp.mongodb.net/test?retryWrites=true&w=majority`;
-const connect = mongoose.connect(url,{useNewUrlParser:true, useUnifiedTopology:true});
+const connect = mongoose.connect(url,{useNewUrlParser:true, useUnifiedTopology:true, useCreateIndex:true});
 
 connect.then((db)=>{  
   console.log("Connected correctly to server");

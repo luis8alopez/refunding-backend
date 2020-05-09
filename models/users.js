@@ -34,10 +34,6 @@ const userSchema = new Schema({
         type: String,
         default: ''
     },
-    current:{
-        type: Number,
-        default:[0,0,0,0,0,0,0,0,0,0,0]
-    },
     history: [buySchema]
 }, {
     timestamps: true
