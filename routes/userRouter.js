@@ -97,8 +97,11 @@ userRouter.route('/currentMoney')
         Users.findOne({ email: req.body.email })
             .then((user) => {
                 if (user) {
-                    console.log("Entro por acá");
-                    user.currentMoney = req.body.money;
+                    let ref = directionUtil.sumMoney(user.currentMoney,req.body.money);
+                    console.log("El método devolvió: ", req.body.money);
+                    console.log("user :", user.currentMoney);
+                    user.currentMoney = ref;
+                    user.markModified('currentMoney');
                     user.save()
                         .then((user) => {
                             res.status(200).send({

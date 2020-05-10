@@ -104,7 +104,7 @@ exports.getRefundRefactor = (price, user) => {
                 refunds[j] += 1;
                 price -= parseInt(arr[j]);
                 jsonObj.refund[arr[j]] = refunds[j];
-            }else{
+            } else {
                 j -= 1;
             }
         } else {
@@ -117,15 +117,32 @@ exports.getRefundRefactor = (price, user) => {
         }
         if (j < 0) {
             j = 10;
-            flag +=1;
+            flag += 1;
         }
 
-        if(flag==3){
+        if (flag == 3) {
             return null
         }
         // console.log("Refund obj en cada iteración tiene: ", refunds);
         // console.log("Current: ", userMoney.refund);
     }
-    return {jsonObj,userMoney};
+    return { jsonObj, userMoney };
+}
+
+exports.sumMoney = (vieja, nueva) => {
+
+    let arr = ['50', '100', '200', '500', '1000', '2000', '5000', '10000', '20000', '50000', '100000'];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (isNaN(nueva[arr[i]])) {
+            console.log("Problema: ", nueva[arr[i]]);
+        }
+        else {
+            vieja[arr[i]] += nueva[arr[i]];
+        }
+
+    }
+    console.log("El retorno será: ", vieja);
+    return vieja;
 }
 
