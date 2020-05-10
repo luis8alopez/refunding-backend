@@ -14,9 +14,7 @@ directionRouter.route('/getKm')
             err = 'Direction not found';
             next(err);
         }
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(direction);
+        res.status(200).send(direction);
     });
 directionRouter.route('/getPrice')
     .get((req, res, next) => {
@@ -26,9 +24,7 @@ directionRouter.route('/getPrice')
             err = 'Price not found';
             next(err);
         }
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(price);
+        res.status(200).send(price);
     });
 
 directionRouter.route('/getRefund')
@@ -39,12 +35,7 @@ directionRouter.route('/getRefund')
             err = 'Refund not found';
             next(err);
         }
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(refund);
+        res.status(200).send(refund);
     });
 
 module.exports = directionRouter;
-
-
-

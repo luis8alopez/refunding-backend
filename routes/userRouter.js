@@ -1,7 +1,8 @@
 const Users = require('../models/users');
 const express = require('express');
 const userRouter = express.Router();
-const bodyparser = require('body-parser')
+const bodyparser = require('body-parser');
+const directionUtil = require('../utils/directionUtils');
 
 userRouter.use(bodyparser.json());
 
@@ -70,11 +71,11 @@ userRouter.route('/saveHistory')
         Users.findOne({ email: req.body.email })
             .then((user) => {
                 if (user) {
-                    user.history.push({precio: req.body.precio});
-                    console.log("en user hay: ",user);
+                    user.history.push({ precio: req.body.precio });
+                    console.log("en user hay: ", user);
                     console.log("En user quedó user");
                     //Error aquí.
-                    user.save() 
+                    user.save()
                         .then((user) => {
                             res.status(200).send({
                                 message: "User succesfully updated",
@@ -88,6 +89,65 @@ userRouter.route('/saveHistory')
 
             })
             .catch((err) => { console.log(err) })
+
+    });
+
+userRouter.route('/currentMoney')
+    .put((req, res, next) => {
+        Users.findOne({ email: req.body.email })
+            .then((user) => {
+                if (user) {
+                    console.log("Entro por acá");
+                    user.currentMoney = req.body.money;
+                    user.save()
+                        .then((user) => {
+                            res.status(200).send({
+                                message: "User succesfully updated",
+                                user: user
+                            })
+                        }).catch((err) => { console.log(err) })
+                }
+                else {
+                    res.status(404).json({ message: "There is no user registrated with that email" });
+                }
+
+            })
+            .catch((err) => { console.log(err) })
+    });
+
+userRouter.route('/getRefund')
+    .post((req, res, next) => {
+        Users.findOne({ email: req.body.email })
+            .then(async (user) => {
+                if (user) {
+                    const obj = await directionUtil.getRefundRefactor(req.body.price, user);
+                    if (obj == null) {
+                        res.status(404).send({ message: 'Not enough cash to pay' });
+                    }
+                    else {
+                        let money = obj.userMoney;
+                        let refund = obj.jsonObj;
+                        user.currentMoney = money.refund;
+                        user.save()
+                            .then((user) => {
+                                console.log(user);
+                                res.status(200).send({
+                                    message: "User succesfully updated",
+                                    refund: refund.refund,
+                                    moneySaved: money,
+                                    user: user
+                                })
+                            })
+                            .catch((err) => { console.log(err) })
+                    }
+                }
+                else {
+                    res.status(404).json({ message: "There is no user registrated with that email" });
+                }
+
+            })
+            .catch((err) => { console.log(err) })
+
 
     });
 
