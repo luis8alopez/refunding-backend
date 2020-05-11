@@ -130,7 +130,9 @@ userRouter.route('/getRefund')
                     else {
                         let money = obj.userMoney;
                         let refund = obj.jsonObj;
-                        user.currentMoney = money.refund;
+                        console.log("Falla acá ", money);
+                        user.currentMoney = money;
+                        user.markModified('currentMoney');
                         user.save()
                             .then((user) => {
                                 console.log(user);

@@ -99,8 +99,8 @@ exports.getRefundRefactor = (price, user) => {
 
     while (price > 0) {
         if (price >= arr[j]) {
-            if (userMoney.refund[arr[j]] != 0) {
-                userMoney.refund[arr[j]] -= 1;
+            if (userMoney[arr[j]] != 0) {
+                userMoney[arr[j]] -= 1;
                 refunds[j] += 1;
                 price -= parseInt(arr[j]);
                 jsonObj.refund[arr[j]] = refunds[j];
