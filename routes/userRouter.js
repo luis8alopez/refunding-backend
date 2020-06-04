@@ -97,7 +97,7 @@ userRouter.route('/currentMoney')
         Users.findOne({ email: req.body.email })
             .then((user) => {
                 if (user) {
-                    let ref = directionUtil.sumMoney(user.currentMoney,req.body.money);
+                    let ref = directionUtil.sumMoney(user.currentMoney, req.body.money);
                     console.log("El método devolvió: ", req.body.money);
                     console.log("user :", user.currentMoney);
                     user.currentMoney = ref;
@@ -154,6 +154,20 @@ userRouter.route('/getRefund')
             .catch((err) => { console.log(err) })
 
 
+    });
+
+userRouter.route('/getHistory')
+    .get((req, res, next) => {
+        Users.findOne({ email: req.query.email })
+            .then((user) => {
+                if (user) {
+                    res.status(200).json(user.history);                    
+                }
+                else {
+                    res.status(404).json({ message: "There is no user registrated" });
+                }
+            })
+            .catch((err) => { console.log(err) })
     });
 
 
