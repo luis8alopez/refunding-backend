@@ -32,7 +32,7 @@ directionRouter.route('/getPrice')
 
 directionRouter.route('/getRefund')
     .get((req, res, next) => {
-        const refund = directionUtil.getRefund(req.query.price);
+        const refund = directionUtil.getRefundRefactor(req.query.price);
         if (!refund) {
             res.statusCode = 404
             err = 'Refund not found';
