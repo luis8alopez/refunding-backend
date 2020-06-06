@@ -173,11 +173,12 @@ userRouter.route('/getHistory')
     userRouter.route('/getTotal')
     .get((req, res, next) => {
         Users.findOne({ email: req.query.email })
-            .then((user) => {
+            .then(async (user) => {
                 if (user) {
                     let total = directionUtil.sumTotal(user.currentMoney);
+                    let dolar = await directionUtil.getDolar(total);
                     console.log("total tiene ",total);
-                    res.status(200).json(user.currentMoney);                    
+                    res.status(200).json({peso: total, dolar: dolar});                    
                 }
                 else {
                     res.status(404).json({ message: "There is no user registrated" });

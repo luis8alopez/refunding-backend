@@ -156,3 +156,13 @@ exports.sumTotal = (currentMoney) =>{
     return sum;
 }
 
+exports.getDolar = async (peso) => {
+    let call = await axios.get("https://free.currconv.com/api/v7/convert?q=USD_COP,COP_USD&compact=ultra&apiKey=234582b91a716611fea5");
+
+    console.log(call.data);
+
+    let dolars = peso / call.data["USD_COP"];
+    console.log("Dolars :" , dolars);
+    return dolars;
+}
+
