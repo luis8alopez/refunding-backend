@@ -146,3 +146,13 @@ exports.sumMoney = (vieja, nueva) => {
     return vieja;
 }
 
+exports.sumTotal = (currentMoney) =>{
+
+    let arr = ['50', '100', '200', '500', '1000', '2000', '5000', '10000', '20000', '50000', '100000'];
+    let sum = 0;
+    for(let i = 0; i<11;i++){
+        sum = sum + (currentMoney[arr[i]] * parseInt(arr[i]));
+    }
+    return sum;
+}
+

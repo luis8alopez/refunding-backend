@@ -170,5 +170,21 @@ userRouter.route('/getHistory')
             .catch((err) => { console.log(err) })
     });
 
+    userRouter.route('/getTotal')
+    .get((req, res, next) => {
+        Users.findOne({ email: req.query.email })
+            .then((user) => {
+                if (user) {
+                    let total = directionUtil.sumTotal(user.currentMoney);
+                    console.log("total tiene ",total);
+                    res.status(200).json(user.currentMoney);                    
+                }
+                else {
+                    res.status(404).json({ message: "There is no user registrated" });
+                }
+            })
+            .catch((err) => { console.log(err) })
+    });
+
 
 module.exports = userRouter;
